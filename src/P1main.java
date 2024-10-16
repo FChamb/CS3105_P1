@@ -1,3 +1,5 @@
+import java.util.*;
+
 /********************Starter Code
  * 
  * This class contains some examples of required inputs and outputs
@@ -30,7 +32,7 @@ public class P1main {
 		String algo=args[0];
 		int d=Integer.parseInt(args[1]);
 		String start=args[2];
-		int coverage=Math.round(d*d*Integer.parseInt(args[3])/100);
+		int coverage=d*d*Integer.parseInt(args[3])/100;
 		int time_limit=30; //run at most for 30s
 		//run your search algorithm 
 		int path_cost=runSearch(algo, d, start, coverage, verbose, time_limit);
@@ -44,7 +46,7 @@ public class P1main {
 		//Example: java P1main BestF 4 0,0 35
 
 
-
+        /*
 		if(verbose) {
 			//assume 
 			path_cost=13;
@@ -94,6 +96,7 @@ public class P1main {
 		}
 
 		//3) the path cost 
+         */
 
 		System.out.println(path_cost);
 
@@ -104,9 +107,11 @@ public class P1main {
 		switch(algo) {
 
 		case "BestF": //run BestF
-			return NOT_IMPLEMENTED;
+            BestFirstSearch bestF = new BestFirstSearch(d, new int[]{Integer.parseInt(start.split(",")[0]), Integer.parseInt(start.split(",")[1])}, coverage, verbose, time_limit);
+			return bestF.search();
 		case "AStar": //run AStar
-			return NOT_IMPLEMENTED;
+            AStarSearch aStar = new AStarSearch(d, new int[]{Integer.parseInt(start.split(",")[0]), Integer.parseInt(start.split(",")[1])}, coverage, verbose, time_limit);
+			return aStar.search();
 		case "BestFOpt": //run BestF with additional heuristic
 			return NOT_IMPLEMENTED;
 		case "AStarOpt": //run AStar with additional heuristic
@@ -116,8 +121,4 @@ public class P1main {
 		return NOT_IMPLEMENTED;
 
 	}
-
-
-
-
 }
