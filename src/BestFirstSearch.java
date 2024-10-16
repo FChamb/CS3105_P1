@@ -19,7 +19,7 @@ public class BestFirstSearch {
     }
 
     public int search() {
-        PriorityQueue<Node> frontier = new PriorityQueue<>(Comparator.comparingInt(Node::getHeuristic));
+        PriorityQueue<Node> frontier = new PriorityQueue<>(Comparator.comparingInt(Node::heuristic));
         int nodes = 0;
 
         Node begin = new Node(null, start[0], start[1], 0, 1, calculateHeuristic(coverage, 1));
@@ -33,25 +33,25 @@ public class BestFirstSearch {
             Node current = frontier.poll();
             nodes++;
 
-            if (current.getVisited() == coverage) {
+            if (current.visited() == coverage) {
                 if (verbose) {
                     System.out.println(nodes);
 
                     String path = "";
                     System.out.println(constructPath(current, path));
 
-                    System.out.println(current.getVisited());
+                    System.out.println(current.visited());
                 }
-                return current.getCost();
+                return current.cost();
             }
 
             for (int[] move : valid_Moves) {
-                int x = current.getCol() + move[0];
-                int y = current.getRow() + move[1];
+                int x = current.col() + move[0];
+                int y = current.row() + move[1];
 
                 if (validMove(d, x, y) && !inPath(current, new int[]{x, y})) {
-                    int cost = current.getCost() + calculateCost(move);
-                    Node next = new Node(current, x, y, cost, current.getVisited() + 1, calculateHeuristic(coverage, current.getVisited() + 1));
+                    int cost = current.cost() + calculateCost(move);
+                    Node next = new Node(current, x, y, cost, current.visited() + 1, calculateHeuristic(coverage, current.visited() + 1));
                     frontier.add(next);
                 }
             }
@@ -65,10 +65,10 @@ public class BestFirstSearch {
     }
 
     private boolean inPath(Node node, int[] pos) {
-        Node parent = node.getParent();
+        Node parent = node.parent();
         if (parent == null) {
             return false;
-        } else if (parent.getCol() == pos[0] && parent.getRow() == pos[1]) {
+        } else if (parent.col() == pos[0] && parent.row() == pos[1]) {
             return true;
         } else {
             return inPath(parent, pos);
@@ -76,11 +76,11 @@ public class BestFirstSearch {
     }
 
     private String constructPath(Node node, String path) {
-        Node parent = node.getParent();
+        Node parent = node.parent();
         if (parent == null) {
-            return "(" + node.getCol() + "," + node.getRow() + ")" + path;
+            return "(" + node.col() + "," + node.row() + ")" + path;
         } else {
-            return constructPath(parent, "(" + node.getCol() + "," + node.getRow() + ")" + path);
+            return constructPath(parent, "(" + node.col() + "," + node.row() + ")" + path);
         }
     }
 
@@ -99,7 +99,7 @@ public class BestFirstSearch {
         int count = 0;
         System.out.print("[");
         for (Node node : frontier) {
-            System.out.print("(" + node.getCol() + "," + node.getRow() + "):" + node.getHeuristic());
+            System.out.print("(" + node.col() + "," + node.row() + "):" + node.heuristic());
             count++;
             if (count != frontier.size()) {
                 System.out.print(", ");

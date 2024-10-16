@@ -36,68 +36,6 @@ public class P1main {
 		int time_limit=30; //run at most for 30s
 		//run your search algorithm 
 		int path_cost=runSearch(algo, d, start, coverage, verbose, time_limit);
-
-
-		/*
-		 * The system must print the following information from your search methods
-		 * All code below is for demonstration purposes only
-		 */
-
-		//Example: java P1main BestF 4 0,0 35
-
-
-        /*
-		if(verbose) {
-			//assume 
-			path_cost=13;
-			if(path_cost>=0) {//path found
-
-				// 1) Print the Frontier at each step before polling the node, using a brief representation of the state only, formatting is up to you
-
-				String frontier_string="";
-
-				//starting point (0,0) 
-				//insert node in the frontier, then print the frontier:
-				frontier_string="[(0,0):12]";
-
-				System.out.println(frontier_string);
-
-				//extract (0,0) 
-				//insert successors in the frontier (3,0), (0,3), (2,2), then print the frontier,  and repeat for all steps until a path is found or not 
-
-
-				frontier_string="[(3,0):9, (0,3):9, (2,2):9]\n"
-						+ "[(3,3):6, (1,2):6, (2,2):9, (0,3):9]\n"
-						+ "[(0,3):3, (1,1):3, (1,2):6, (2,2):9, (0,3):9]\n"
-						+ "[(2,1):0, (1,1):3, (1,2):6, (2,2):9, (0,3):9]";
-
-				System.out.println(frontier_string);
-			}
-
-			// 2) three lines representing the number of nodes explored, and the path and length of the path if any
-
-
-			int n_explored=5;
-			System.out.println(n_explored);
-
-
-			String path="";
-			int path_length=0;
-			if(path_cost==NOT_FOUND || path_cost==NOT_TERMINATED) {
-				//do nothing
-			}else {
-				path="(0,0)(3,0)(3,3)(0,3)(2,1)";
-				path_length=5;
-				System.out.println(path);
-				System.out.println(path_length);
-			}
-
-
-		}
-
-		//3) the path cost 
-         */
-
 		System.out.println(path_cost);
 
 	}
