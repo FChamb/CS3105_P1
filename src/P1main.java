@@ -56,7 +56,9 @@ public class P1main {
 		case "AStarOpt": //run AStar with additional heuristic
             AStarSearchOpt aStarOpt = new AStarSearchOpt(d, new int[]{Integer.parseInt(start.split(",")[0]), Integer.parseInt(start.split(",")[1])}, coverage, verbose, time_limit);
             return aStarOpt.search();
-
+        case "Alt": //run AStar with additional heuristic
+            AltSearch altSearch = new AltSearch(d, new int[]{Integer.parseInt(start.split(",")[0]), Integer.parseInt(start.split(",")[1])}, coverage, verbose, time_limit);
+            return altSearch.search();
 		}
 		return NOT_IMPLEMENTED;
 
