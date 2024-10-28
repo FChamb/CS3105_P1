@@ -27,5 +27,5 @@ java Comparison.java
 # Tests #
 To run the tests, use the following command:
 ```console
-./test.sh
+stacscheck /cs/studres/CS3105/Coursework/P1/Tests/
 ```
