@@ -4,13 +4,13 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
- * Implementation for Best First Search Opt. This class represents a search algorithm for best first opt. The class
+ * Implementation for A Star Search. This class represents a search algorithm for A Star. The class
  * stores private local variables that help the various methods calculate the search path. Most of these
  * variables are self-explanatory, except valid_Moves. This is a 2D array of possible moves. Each array in the
  * outer array represents a direction path the pawn can move at each turn. The numbers are added to the current
  * position.
  */
-public class BestFirstSearchOpt {
+public class AStarSearchOpt {
     private final int d;
     private final int[] start;
     private final int coverage;
@@ -22,7 +22,7 @@ public class BestFirstSearchOpt {
     private int nodes;
 
     /**
-     * This method represents the default constructor for BestFirstOpt. The program sets the private attributes with
+     * This method represents the default constructor for AStar. The program sets the private attributes with
      * the provided values.
      * @param d - the dimensions of the board
      * @param start - an integer array representing where to start on the board
@@ -30,7 +30,7 @@ public class BestFirstSearchOpt {
      * @param verbose - a boolean value on whether to print output or not
      * @param time_limit - the maximum time limit to allow searching
      */
-    public BestFirstSearchOpt(int d, int[] start, int coverage, boolean verbose, int time_limit) {
+    public AStarSearchOpt(int d, int[] start, int coverage, boolean verbose, int time_limit) {
         this.d = d;
         this.start = start;
         this.coverage = coverage;
@@ -39,11 +39,12 @@ public class BestFirstSearchOpt {
     }
 
     /**
-     * Search is the actual searching aspect of BestFOpt. This is nearly identical to BestF. The method grabs the current time for future reference.
-     * Then the program creates a priority queue and creates a value to store how many nodes have been explored. The
-     * first state/node of the board is created with default user provided selection and the node is put on the
-     * priority queue/frontier. A while loop checks if the frontier is empty at each iteration. If verbose is active,
-     * the frontier is printed. Then the program checks that the time has not exceeded the provided limit. Otherwise,
+     * Search is the actual searching aspect of AStar. It is nearly identical to the AStar implementation.
+     * The method grabs the current time for future reference. Then the program creates a priority queue
+     * and creates a value to store how many nodes have been explored. The first state/node of the board is
+     * created with default user provided selection and the node is put on the priority queue/frontier.
+     * A while loop checks if the frontier is empty at each iteration. If verbose is active, the frontier is printed.
+     * Then the program checks that the time has not exceeded the provided limit. Otherwise,
      * the current position is grabbed. If the number of visited cells is equal to the coverage specified the program stops
      * after printing/returning the appropriate values. Otherwise, each possible move is checked for validity and is added
      * into a new node which in turn is added to the frontier.
@@ -89,7 +90,8 @@ public class BestFirstSearchOpt {
 
                 if (validMove(d, x, y) && !inPath(current, new int[]{x, y})) {
                     int cost = current.cost() + calculateCost(move);
-                    Node next = new Node(current, x, y, cost, current.visited() + 1, calculateHeuristic(coverage, current.visited() + 1, x, y));
+                    // Adjusts the heuristic to prefer horizontal and vertical moves.
+                    Node next = new Node(current, x, y, cost, current.visited() + 1, calculateHeuristic(coverage, current.visited() + 1, x, y) + cost);
                     frontier.add(next);
                 }
             }

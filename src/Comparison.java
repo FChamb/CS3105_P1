@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalTime;
 
 public class Comparison {
     public static void main(String[] args) {
@@ -11,7 +13,7 @@ public class Comparison {
         File file = new File("../comparison_data/data.csv");
         try {
             FileWriter writer = new FileWriter(file);
-            writer.write("dimension,coverage,costBF,nodesBF,costAS,nodesAS\n");
+            writer.write("dimension,coverage,timeBF,costBF,nodesBF,timeAS,costAS,nodesAS\n");
             runComparison(writer);
         } catch (IOException e) {
             System.out.println("IO Exception: " + e.getMessage());
@@ -29,10 +31,14 @@ public class Comparison {
                 System.out.println(dimensions + ", " + cov);
                 BestFirstSearch bestF = new BestFirstSearch(dimensions, new int[]{0, 0}, cov, false, 30);
                 AStarSearch aStar = new AStarSearch(dimensions, new int[]{0, 0}, cov, false, 30);
+                LocalTime timeStartBF = LocalTime.now();
                 int costBF = bestF.search();
+                LocalTime timeBF = LocalTime.now();
+                LocalTime timeStartAS = LocalTime.now();
                 int costAS = aStar.search();
+                LocalTime timeAS = LocalTime.now();
                 try {
-                    writer.write(dimensions + "," + coverage + "," + costBF + "," + bestF.getNodes() + "," + costAS + "," + aStar.getNodes() + "\n");
+                    writer.write(dimensions + "," + coverage + "," + Duration.between(timeStartBF, timeBF).toMillis() + "," + costBF + "," + bestF.getNodes() + "," + Duration.between(timeStartAS, timeAS).toMillis() + "," + costAS + "," + aStar.getNodes() + "\n");
                     writer.flush();
                 } catch (IOException e) {
                     System.out.println("IO Exception: " + e.getMessage());

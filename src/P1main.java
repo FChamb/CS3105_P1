@@ -54,7 +54,8 @@ public class P1main {
             BestFirstSearchOpt bestFOpt = new BestFirstSearchOpt(d, new int[]{Integer.parseInt(start.split(",")[0]), Integer.parseInt(start.split(",")[1])}, coverage, verbose, time_limit);
 			return bestFOpt.search();
 		case "AStarOpt": //run AStar with additional heuristic
-			return NOT_IMPLEMENTED;
+            AStarSearchOpt aStarOpt = new AStarSearchOpt(d, new int[]{Integer.parseInt(start.split(",")[0]), Integer.parseInt(start.split(",")[1])}, coverage, verbose, time_limit);
+            return aStarOpt.search();
 
 		}
 		return NOT_IMPLEMENTED;
