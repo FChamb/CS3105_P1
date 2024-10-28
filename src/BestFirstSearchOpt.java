@@ -4,13 +4,13 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
- * Implementation for Best First Search. This class represents a search algorithm for best first. The class
+ * Implementation for Best First Search Opt. This class represents a search algorithm for best first opt. The class
  * stores private local variables that help the various methods calculate the search path. Most of these
  * variables are self-explanatory, except valid_Moves. This is a 2D array of possible moves. Each array in the
  * outer array represents a direction path the pawn can move at each turn. The numbers are added to the current
  * position.
  */
-public class BestFirstSearch {
+public class BestFirstSearchOpt {
     private final int d;
     private final int[] start;
     private final int coverage;
@@ -22,7 +22,7 @@ public class BestFirstSearch {
     private int nodes;
 
     /**
-     * This method represents the default constructor for BestFirst. The program sets the private attributes with
+     * This method represents the default constructor for BestFirstOpt. The program sets the private attributes with
      * the provided values.
      * @param d - the dimensions of the board
      * @param start - an integer array representing where to start on the board
@@ -30,7 +30,7 @@ public class BestFirstSearch {
      * @param verbose - a boolean value on whether to print output or not
      * @param time_limit - the maximum time limit to allow searching
      */
-    public BestFirstSearch(int d, int[] start, int coverage, boolean verbose, int time_limit) {
+    public BestFirstSearchOpt(int d, int[] start, int coverage, boolean verbose, int time_limit) {
         this.d = d;
         this.start = start;
         this.coverage = coverage;
@@ -38,7 +38,7 @@ public class BestFirstSearch {
         this.time_limit = time_limit;
     }
 
-    /**
+    /** This needs to be rewritten!!!!!!!!!!!!!!!!!!!!
      * Search is the actual searching aspect of BestF. The method grabs the current time for future reference.
      * Then the program creates a priority queue and creates a value to store how many nodes have been explored. The
      * first state/node of the board is created with default user provided selection and the node is put on the
